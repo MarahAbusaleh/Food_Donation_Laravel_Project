@@ -12,6 +12,7 @@
 
     {{-- <link href="css/style.css" rel="stylesheet" /> --}}
     <!-- CSS FILES -->
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.3/getting-started/download/">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">

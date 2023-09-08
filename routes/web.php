@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DonationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Pages.news');
+    return view('Pages.index');
 });
 
 Route::get('/dashboard', function () {
@@ -29,3 +31,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/subcategory', function () {
+    return view('Pages.sub-category');
+});
+Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subcategory');
+

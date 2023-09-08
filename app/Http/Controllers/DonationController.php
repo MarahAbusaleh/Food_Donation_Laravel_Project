@@ -44,9 +44,12 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function show(Donation $donation)
+    public function show($id)
     {
-        //
+      
+        $donations = Donation::where('category_id', $id)->paginate(1);
+        // $category = Donation::where('category_id', $id)->first();
+        return view('pages/sub-category', compact('donations'));
     }
 
     /**

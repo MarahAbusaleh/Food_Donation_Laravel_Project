@@ -4,7 +4,7 @@
 
 
     <main>
-
+<a href="{{ route('subcategory',1) }}"><button>test</button></a>
         <section class="hero-section hero-section-full-height">
             <div class="container-fluid">
                 <div class="row">
