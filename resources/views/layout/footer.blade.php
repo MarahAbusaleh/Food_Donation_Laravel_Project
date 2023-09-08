@@ -15,7 +15,8 @@
 
                         <li class="footer-menu-item"><a href="#" class="footer-menu-link">Causes</a></li>
 
-                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Become a volunteer</a></li>
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Become a volunteer</a>
+                        </li>
 
                         <li class="footer-menu-item"><a href="#" class="footer-menu-link">Partner with us</a></li>
                     </ul>
@@ -91,13 +92,53 @@
     </footer>
 
     <!-- JAVASCRIPT FILES -->
+    {{-- <script src="{{ asset('js/session-messages.js') }}"></script> --}}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/jquery.sticky.js') }}"></script>
     <script src="{{ asset('js/click-scroll.js') }}"></script>
     <script src="{{ asset('js/counter.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('js/partners.js') }}"></script> --}}
 
-</body>
+    <script>
+        $(document).ready(function() {
+            // Check if the success message is present
+            var successMessage = $('#vola_message');
 
-</html>
+            if (successMessage.length) {
+                // Hide the success message after 5 seconds
+                setTimeout(function() {
+                    successMessage.fadeOut('slow');
+                }, 5000);
+            }
+        });
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('.customer-logos').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+                arrows: false,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 4
+                    }
+                }, {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                }]
+            });
+        });
+    </script> --}}
+
+    </body>
+
+    </html>
