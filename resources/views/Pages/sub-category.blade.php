@@ -706,7 +706,7 @@
         </div>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a href="{{ route('singleDonation', 1) }}">
           View More
         </a>
       </div>

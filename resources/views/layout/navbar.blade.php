@@ -10,7 +10,7 @@
 
     <title>Kind Heart Charity - Free Bootstrap 5.2.2 CSS Template</title>
 
-    {{-- <link href="css/style.css" rel="stylesheet" /> --}}
+    <link href="css/style.css" rel="stylesheet" />
     <!-- CSS FILES -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -29,6 +29,7 @@ https://templatemo.com/tm-581-kind-heart-charity
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://fontawesome.com/icons/link?f=classic&s=solid">
 </head>
 
 <body id="section_1">
