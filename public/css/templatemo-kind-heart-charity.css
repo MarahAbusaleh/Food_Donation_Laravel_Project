@@ -1839,7 +1839,7 @@ blockquote::before {
 /* pagination */
 .pagination > li > a,
 .pagination > li > span {
-    color: green; // use your own color here
+    color: green; 
 }
 
 .pagination > .active > a,
@@ -1872,3 +1872,16 @@ blockquote::before {
   background-color: darkorange; /* Change color on hover/focus */
   cursor: pointer; /* Show a hand cursor on hover */
 }
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* .categorycard{
+  height: 520px !important;
+}
+.categorybtn{
+  margin-bottom: 0px !important;
+} */

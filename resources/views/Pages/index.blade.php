@@ -125,15 +125,15 @@
                         <h2>Our Causes</h2>
                     </div>
                     @foreach ($categories as $item)
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
-                            <div class="custom-block-wrap">
+                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0 ">
+                            <div class="custom-block-wrap categorycard">
                                 <img src="{{ $item->image }}" class="custom-block-image img-fluid" alt="">
 
                                 <div class="custom-block">
                                     <div class="custom-block-body">
                                         <h5 class="mb-3">{{ $item->name }}</h5>
 
-                                        <p>{{ $item->description }}</p>
+                                        <p class="description">{{ $item->description }}</p>
 
                                         {{-- <div class="progress mt-4">
                                         <div class="progress-bar w-75" role="progressbar" aria-valuenow="75"
@@ -153,7 +153,7 @@
                                     </div> --}}
                                     </div>
 
-                                    <a href="donate.html" class="custom-btn btn">Donate now</a>
+                                    <a href="{{ route('subcategory', $item->id) }}" class="custom-btn btn categorybtn">Donate now</a>
                                 </div>
                             </div>
                         </div>
