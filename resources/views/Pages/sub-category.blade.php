@@ -49,11 +49,21 @@
           </div>
           @endforeach
           
+          <div class="col-12 my-4 rounded-5 py-3" style="background: #f0f8ff">
+            <center>
+              <h4 style="color: #5a6f80">If you want to donate something else</h style="color: #5a6f80">
+                <br><br>
+                <div class="col-2 custom-form">
+                  <button type="submit" class="form-control">click here</button>
+                </div>
+              </div>
+            </center>
         </div>
+        
       
         
     </div> <br>
-    <div style="padding-bottom: 10px;font-size: 14px;margin-left:50%;margin-top:30px;" >
+    <div style="padding-bottom: 10px;font-size: 14px;margin-left:45%;margin-top:30px;" >
       {{ $donations->links() }}
   </div>
   </section>

@@ -18,7 +18,7 @@ class DonationsTableSeeder extends Seeder
     {
         // Donation::truncate();
         Donation::create([
-            'category_id' => 1, 
+            'category_id' => 2, 
                 'name' => 'Donation 1',
                 'description' => 'Description for Donation 1',
                 'price' => 100.00,
