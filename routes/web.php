@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VolanteerController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Pages.news');
+Route::get('/welcome', function () {
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -28,4 +31,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// BanySaleh routes
+
+
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('save_volanteer', 'storeVolanteer');
+});
+// Route::get('/', function () {
+//     return view('Pages.index');
+// });
+
+
+
+
+// Route::get()
