@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\UserDonation;
 use App\Models\User;
 use App\Models\PaymentDetails;
+use App\Models\Donation;
+
+
+use App\Models\Other;
 use Illuminate\Http\Request;
 
-class UserDonationController extends Controller
+class OtherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,11 +45,14 @@ class UserDonationController extends Controller
         $request->validate([
             'donation-phone' => 'required|regex:/^07\d{8}$/',
             'donation-address' => 'required|string',
+            'textarea' => 'required',
         ],[
             'donation-phone.required' => 'Please enter your phone number.',
             'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
             'donation-address.required' => 'Please enter your address.',
             'donation-address.string' => 'The address must be a valid string.',
+            'textarea.required' => 'Please provide some additional information.',
+
         ]);
 
         $user = new User();
@@ -61,27 +67,34 @@ class UserDonationController extends Controller
         $userDonation->description= $request->input('textarea');
         $userDonation->save();
 
-        return redirect('/');
-}
+        return redirect('/')->with('success', 'Your donation has been submit successfully!');
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserDonation  $userDonation
+     * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function show(UserDonation $userDonation)
+    public function show($user_id)
     {
-        //
+        $userdonation = UserDonation::where('user_id', $user_id)->first();
+        // $donation = Donation::where('id', $id)->first();
+        $user = User::where('id', $user_id)->first(); // Use $user_id to query the user
+        // $userdonation = UserDonation::all(); // Use $user_id to query the user
+        // $user = User::all(); // Use $user_id to query the user
+        return view('Pages.other',[
+            'userdonations'=>$userdonation, 'users' => $user
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserDonation  $userDonation
+     * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserDonation $userDonation)
+    public function edit(Other $other)
     {
         //
     }
@@ -90,46 +103,21 @@ class UserDonationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserDonation  $userDonation
+     * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Other $other)
     {
-
-        // Validation (example)
-        $request->validate([
-            'donation-phone' => 'required|regex:/^07\d{8}$/',
-            'donation-address' => 'required|string',
-        ],[
-            'donation-phone.required' => 'Please enter your phone number.',
-            'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
-            'donation-address.required' => 'Please enter your address.',
-            'donation-address.string' => 'The address must be a valid string.',
-          ]);
-
-          $user = new User();
-          $user->mobile = $request->input('donation-phone');
-          $user->address = $request->input('donation-address');
-          $user->password = bcrypt('1234'); // Hash the password securely
-
-        $userDonation=new UserDonation();
-        $userDonation->user_id=$request->input('user_id');
-        $userDonation->donation_id=$request->input('donation_id');
-        $userDonation->quantity= $request->input('quantity');
-        $userDonation->description= $request->input('textarea');
-        $userDonation->save();
-
-        return redirect('/')->with('success', 'Your donation has been submit successfully!');
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserDonation  $userDonation
+     * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserDonation $userDonation)
+    public function destroy(Other $other)
     {
         //
     }

@@ -4,9 +4,9 @@
 <section class="food_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container heading_center my-4">
-        
+
         <h2>
-         
+
           @php $categoryNameDisplayed = false; @endphp
 
           @foreach ($donations as $donation)
@@ -15,7 +15,7 @@
                   @php $categoryNameDisplayed = true; @endphp
               @endif
           @endforeach
-         
+
         </h2>
       </div>
 
@@ -24,7 +24,7 @@
           <div class="col-sm-6 col-lg-4 all ">
             <div class="box">
               <div>
-          
+
                 <div class="img-box">
                   <img src="{{ asset('images/donations/' . $donation->image) }}" alt="{{ $donation->name }}" width="200"
                     height="200">
@@ -42,26 +42,26 @@
                     </h6>
                     <a href="{{ route('singleDonation', $donation->id) }}"><button class="orange-button">Donate</button></a>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
           </div>
           @endforeach
-          
+
           <div class="col-12 my-4 rounded-5 py-3" style="background: #f0f8ff">
             <center>
-              <h4 style="color: #5a6f80">If you want to donate something else</h style="color: #5a6f80">
+              <h4 style="color: #5a6f80">If you want to donate something else</h4>
                 <br><br>
                 <div class="col-2 custom-form">
-                  <button type="submit" class="form-control">click here</button>
+                    <a href="{{ route('other.show', ['user_id' => 1]) }}"><button type="submit" class="form-control">click here</button></a>
                 </div>
               </div>
             </center>
         </div>
-        
-      
-        
+
+
+
     </div> <br>
     <div style="padding-bottom: 10px;font-size: 14px;margin-left:45%;margin-top:30px;" >
       {{ $donations->links() }}

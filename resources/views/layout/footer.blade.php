@@ -29,7 +29,7 @@
                     <h5 class="site-footer-title mb-3">Volunteer now</h5>
 
                     <ul class="footer-menu">
-                        
+
                         <li class="footer-menu-item"><a href="#section_4" class="footer-menu-link">Become a volunteer <br>
                             Partner with us
                         </a>
@@ -71,7 +71,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-md-7 col-12">
-                        <p class="copyright-text ">Copyright © 2036 <a href="#">Kind Heart</a> 
+                        <p class="copyright-text ">Copyright © 2036 <a href="#">Kind Heart</a>
                         </p>
                     </div>
 
@@ -105,6 +105,7 @@
     </footer>
 
     <!-- JAVASCRIPT FILES -->
+
     {{-- <script src="{{ asset('js/session-messages.js') }}"></script> --}}
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -112,6 +113,7 @@
     <script src="{{ asset('js/click-scroll.js') }}"></script>
     <script src="{{ asset('js/counter.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/donation.js') }}"></script>
     {{-- <script src="{{ asset('js/partners.js') }}"></script> --}}
 
     <script>
