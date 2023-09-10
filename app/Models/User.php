@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile',
+        'address',
     ];
 
     /**
@@ -43,7 +45,7 @@ class User extends Authenticatable
     ];
 
     //With UserDonation Model
-    public function userdonations() 
+    public function userdonations()
     {
         return $this->hasMany(UserDonation::class);
     }

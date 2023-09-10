@@ -17,6 +17,7 @@
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
+    
     <!--
 
 TemplateMo 581 Kind Heart Charity
@@ -25,7 +26,7 @@ https://templatemo.com/tm-581-kind-heart-charity
 
 -->
 <!-- Custom styles for this template -->
-    
+
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
