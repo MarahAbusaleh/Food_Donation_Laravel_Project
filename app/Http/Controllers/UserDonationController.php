@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserDonation;
+use App\Models\User;
+use App\Models\PaymentDetails;
 use Illuminate\Http\Request;
 
 class UserDonationController extends Controller
@@ -35,8 +37,32 @@ class UserDonationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        // Validation (example)
+        $request->validate([
+            'donation-phone' => 'required|regex:/^07\d{8}$/',
+            'donation-address' => 'required|string',
+        ],[
+            'donation-phone.required' => 'Please enter your phone number.',
+            'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
+            'donation-address.required' => 'Please enter your address.',
+            'donation-address.string' => 'The address must be a valid string.',
+        ]);
+
+        $user = new User();
+        $user->mobile = $request->input('donation-phone');
+        $user->address = $request->input('donation-address');
+        $user->password = bcrypt('1234'); // Hash the password securely
+
+        $userDonation=new UserDonation();
+        $userDonation->user_id=$request->input('user_id');
+        $userDonation->donation_id=$request->input('donation_id');
+        $userDonation->quantity= $request->input('quantity');
+        $userDonation->description= $request->input('textarea');
+        $userDonation->save();
+
+        return redirect('/');
+}
 
     /**
      * Display the specified resource.
@@ -67,9 +93,34 @@ class UserDonationController extends Controller
      * @param  \App\Models\UserDonation  $userDonation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserDonation $userDonation)
+    public function update(Request $request)
     {
-        //
+
+        // Validation (example)
+        $request->validate([
+            'donation-phone' => 'required|regex:/^07\d{8}$/',
+            'donation-address' => 'required|string',
+        ],[
+            'donation-phone.required' => 'Please enter your phone number.',
+            'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
+            'donation-address.required' => 'Please enter your address.',
+            'donation-address.string' => 'The address must be a valid string.',
+          ]);
+
+          $user = new User();
+          $user->mobile = $request->input('donation-phone');
+          $user->address = $request->input('donation-address');
+          $user->password = bcrypt('1234'); // Hash the password securely
+
+        $userDonation=new UserDonation();
+        $userDonation->user_id=$request->input('user_id');
+        $userDonation->donation_id=$request->input('donation_id');
+        $userDonation->quantity= $request->input('quantity');
+        $userDonation->description= $request->input('textarea');
+        $userDonation->save();
+
+        return redirect('/')->with('success', 'Your donation has been submit successfully!');
+
     }
 
     /**

@@ -15,8 +15,14 @@ return new class extends Migration
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
+            $table->string('payment_id')->nullable();
+            $table->string('payer_id')->nullable();
+            $table->string('payer_email')->nullable();
+            $table->float('amount', 10, 2)->nullable();
+            $table->string('currency')->nullable();
+            $table->string('payment_status')->nullable();
 
-            $table->unsignedBigInteger('user_donation_id');
+            $table->unsignedBigInteger('user_donation_id')->nullable();
 
             $table->timestamps();
 

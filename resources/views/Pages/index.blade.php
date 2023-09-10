@@ -1,5 +1,6 @@
 @extends('Layout.master')
 @section('content')
+{{-- {{ auth()->user()->name; }} --}}
     <main>
         @if (session('message'))
             <div id="vola_message" class="alert alert-primary">{{ session('message') }}</div>

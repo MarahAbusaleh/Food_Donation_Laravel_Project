@@ -20,13 +20,10 @@
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/partners.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> --}}
 
-    <!-- Custom styles for this template -->
 
-    <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://fontawesome.com/icons/link?f=classic&s=solid">
@@ -62,14 +59,17 @@
 
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#becomeVol">Volunteer</a>
-                    </li>                   
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#section_6">Contact</a>
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Login</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="">Login</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ route('logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
