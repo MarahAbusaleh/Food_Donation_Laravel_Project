@@ -5,7 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VolanteerController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\DonationController;
 
 /*
@@ -19,13 +20,14 @@ use App\Http\Controllers\DonationController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth/login');
-});
-// Route::get('/', function () {
-//     return view('Pages.sub-category');
+})->name('loggin');
+
+// Route::post('/indexxx', function () {
+//     // return view('Pages.sub-category');
 //     return view('Pages.index');
-// });
+// })->name("indexxx");
 // Route::get('/welcome', function () {
 //     return view('welcome');
 // });
@@ -60,6 +62,7 @@ Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subc
 
 
 Route::controller(HomeController::class)->group(function () {
+    Route::post('home', 'index');
     Route::get('/', 'index');
     Route::post('save_volanteer', 'storeVolanteer');
 });
@@ -69,5 +72,11 @@ Route::controller(HomeController::class)->group(function () {
 
 
 
+/*------------ Login With google & Facebook ------------*/
 
-// Route::get()
+
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+
+Route::get('auth/facebook', [FacebookController::class, 'facebookPage'])->name('facebook-auth');
+Route::get('auth/facebook/callback', [FacebookController::class, 'facebookredirect']);

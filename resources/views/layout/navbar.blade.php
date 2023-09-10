@@ -69,7 +69,10 @@
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Login</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="">Login</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a class="nav-link custom-btn custom-border-btn btn" href="{{ route('logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
