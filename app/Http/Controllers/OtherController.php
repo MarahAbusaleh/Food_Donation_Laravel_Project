@@ -76,16 +76,15 @@ class OtherController extends Controller
      * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $user_id)
+    public function show($user_id)
     {
-        $donation = Donation::where('id', $id)->first();
         $userdonation = UserDonation::where('user_id', $user_id)->first();
         // $donation = Donation::where('id', $id)->first();
         $user = User::where('id', $user_id)->first(); // Use $user_id to query the user
         // $userdonation = UserDonation::all(); // Use $user_id to query the user
         // $user = User::all(); // Use $user_id to query the user
         return view('Pages.other',[
-            'donations' => $donation, 'userdonations'=>$userdonation, 'users' => $user
+            'userdonations'=>$userdonation, 'users' => $user
         ]);
     }
 

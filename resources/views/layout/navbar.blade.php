@@ -10,76 +10,27 @@
 
     <title>Kind Heart Charity - Free Bootstrap 5.2.2 CSS Template</title>
 
-    {{-- <link href="css/style.css" rel="stylesheet" /> --}}
+    <link href="css/style.css" rel="stylesheet" />
     <!-- CSS FILES -->
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.3/getting-started/download/">
+    <link href="{{ asset('messages-style.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/templatemo-kind-heart-charity.css') }}" rel="stylesheet">
-    
-    <!--
 
-TemplateMo 581 Kind Heart Charity
+    <link href="{{ asset('css/partners.css') }}" rel="stylesheet">
 
-https://templatemo.com/tm-581-kind-heart-charity
 
--->
-<!-- Custom styles for this template -->
-
-    <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://fontawesome.com/icons/link?f=classic&s=solid">
 </head>
 
 <body id="section_1">
 
-    <header class="site-header">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-8 col-12 d-flex flex-wrap">
-                    <p class="d-flex me-4 mb-0">
-                        <i class="bi-geo-alt me-2"></i>
-                        Akershusstranda 20, 0150 Oslo, Norway
-                    </p>
-
-                    <p class="d-flex mb-0">
-                        <i class="bi-envelope me-2"></i>
-
-                        <a href="mailto:info@company.com">
-                            info@company.com
-                        </a>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
-                    <ul class="social-icon">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-twitter"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-facebook"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-youtube"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-whatsapp"></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </header>
 
     <nav class="navbar navbar-expand-lg bg-light shadow-lg">
         <div class="container">
@@ -103,27 +54,11 @@ https://templatemo.com/tm-581-kind-heart-charity
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_2">About</a>
+                        <a class="nav-link click-scroll" href="#ourStory">About</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_3">Causes</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_4">Volunteer</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">News</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">News Listing</a></li>
-
-                            <li><a class="dropdown-item" href="news-detail.html">News Detail</a></li>
-                        </ul>
+                        <a class="nav-link click-scroll" href="#becomeVol">Volunteer</a>
                     </li>
 
                     <li class="nav-item">
@@ -131,7 +66,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                     </li>
 
                     <li class="nav-item ms-3">
-                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Donate</a>
+                        <a class="nav-link custom-btn custom-border-btn btn" href="donate.html">Login</a>
                     </li>
                 </ul>
             </div>
