@@ -22,6 +22,7 @@ class HomeController extends Controller
 
     }
 
+
     public function storeVolanteer(Request $request)
     {
         $request->validate([

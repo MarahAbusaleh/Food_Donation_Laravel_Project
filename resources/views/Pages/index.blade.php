@@ -228,9 +228,7 @@
                                                 <img class="partners_images" alt="" src="{{ $item->image }}" />
                                             </div>
                                         </div>
-                                    @endforeach
-
-                                    
+                                    @endforeach             
                                 </div>
                             </strong>
                         </div>

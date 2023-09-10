@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EmailController;
 
 // Route::get('/', function () {
 //     return view('Pages.sub-category');
@@ -37,19 +39,24 @@ Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subc
 
 
 
-// BanySaleh routes
-
-
+// BanySaleh routes start
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index');
     Route::post('save_volanteer', 'storeVolanteer');
+    Route::get('contact-us', 'show_contact');
 });
-// Route::get('/', function () {
-//     return view('Pages.index');
-// });
+Route::controller(ContactController::class)->group(function () {
+    Route::get('contact-us', 'index');
+    Route::post('store-contacts', 'store');
+});
+Route::controller(EmailController::class)->group(function () {
+    Route::post('send-email-to-all-users', 'sendEmailToAllUsers');
+    Route::get('send-email', 'index');
+});
+
+// BanySaleh routes end
 
 
 
 
-// Route::get()
