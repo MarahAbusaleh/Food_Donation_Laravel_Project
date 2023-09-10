@@ -14,7 +14,9 @@ class PaymentDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $paymentdetails=PaymentDetails::get();
+        // dd($admins);
+       return view('dashboard.paymentdetails.index', compact('paymentdetails'));
     }
 
     /**

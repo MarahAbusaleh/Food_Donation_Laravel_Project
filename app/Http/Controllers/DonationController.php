@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class DonationController extends Controller
      */
     public function index()
     {
-        //
+        $donations=Donation::get();
+        $category=Category::all();
+        // dd($categoryName);
+       return view('dashboard.donations.index', compact('donations', 'category'));
     }
 
     /**
@@ -22,9 +26,12 @@ class DonationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $categoryNames=Category::get();
+        
+        // $categories= $donations->category->name;
+        return view('dashboard.donations.create',compact('categoryNames'));
     }
 
     /**
@@ -35,7 +42,27 @@ class DonationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $relativeImagePath = null; // Initialize relativeImagePath as null
+
+        $newImageName = uniqid() . '-' . $request->input('name') . '.' . $request->file('image')->extension();
+        $relativeImagePath = 'assets/images/' . $newImageName;
+        $request->file('image')->move(public_path('assets/images'), $newImageName);
+        $validatedData =  $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            // 'image' => 'required',
+            'price' => 'required',
+        ]);
+
+    
+        Donation::create([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'image' => $relativeImagePath,
+        ]);
+    
+        return redirect()->route('donations.index');
     }
 
     /**
@@ -55,9 +82,11 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Donation $donation)
+    public function edit($id)
     {
-        //
+        $donations = Donation::findOrFail($id);
+
+        return view('dashboard.donations.edit', compact('donations'));
     }
 
     /**
@@ -67,9 +96,37 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donation $donation)
+    public function update(Request $request,$id)
     {
-        //
+        $validatedData=$request->validate([
+            'name' => 'required',
+            // 'image' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+          ]);
+          $data = $request->except(['_token', '_method']);
+
+        // Check if a new image was uploaded
+        if ($request->hasFile('image')) {
+            $newImage = $this->storeImage($request);
+
+            // Update the image column only if a new image was uploaded
+            $data['image'] = $newImage;
+        }
+
+        Donation::where('id', $id)->update($data);
+
+  
+    //   if ($request->hasFile('image')) {
+    //       $image = $request->file('image');
+    //       $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //       $image->move(public_path('images'), $imageName); 
+  
+    //   }
+      
+    
+  
+      return redirect()->route('donations.index')->with('success', 'Donation updated successfully');
     }
 
     /**
@@ -78,8 +135,20 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donation $donation)
+    public function destroy($id)
     {
-        //
+        Donation::destroy($id);
+        return back()->with('success', 'Donation deleted successfully.');
+    }
+
+public function storeImage($request)
+        {
+        $newImageName = uniqid() . '-' . $request->addedCategoryName . '.' . $request->file('image')->extension();
+        $relativeImagePath = 'assets/images/' . $newImageName;
+        $request->file('image')->move(public_path('assets/images'), $newImageName);
+
+
+        return $relativeImagePath;
+
     }
 }
