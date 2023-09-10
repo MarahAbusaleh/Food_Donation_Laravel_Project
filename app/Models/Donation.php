@@ -9,6 +9,8 @@ class Donation extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'price', 'image', 'category_id'];
+
     //With Category Model
     public function category() 
     {
