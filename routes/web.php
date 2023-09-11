@@ -1,22 +1,26 @@
 <?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\VolanteerController;
+// use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\UserDonationController;
 use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\OtherController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\VolanteerController;
+// use App\Http\Controllers\VolanteerController;
 use App\Http\Controllers\GoogleAuthController;
-use App\Models\UserDonation;
-use Illuminate\Support\Facades\Blade;
+// use App\Models\UserDonation;
+// use Illuminate\Support\Facades\Blade;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,19 +33,24 @@ use Illuminate\Support\Facades\Blade;
 |
 */
 
-Route::get('/login', function () {
-    return view('auth/login');
-})->name('loggin');
+// Route::get('/login', function () {
+//     return view('auth/login');
+// })->name('loggin');
+
+
+// Route::get('/login', function () {
+//     return view('auth/login');
+// });
+// })->name('loggin');
 
 // Route::post('/indexxx', function () {
 //     // return view('Pages.sub-category');
 
 
-Route::get('/food', function () {
-});
-Route::get('/money', function () {
-    return view('Pages.money-donation');
-});
+
+// Route::get('/money', function () {
+//     return view('Pages.money-donation');
+// });
 
 Route::get('/money/{id}', [DonationController::class, 'show'])->middleware(['auth', 'verified'])->name('money.show');
 Route::get('/things/{id}', [DonationController::class, 'shows'])->middleware(['auth', 'verified'])->name('things.show');
@@ -69,6 +78,10 @@ Route::get('paypal/cancel', [PaymentDetailsController::class, 'cancel'])->name('
 // });
 
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [UserProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 // Route::get('/dashboard', )->middleware(['auth', 'verified'])->name('dashboard');
@@ -165,7 +178,8 @@ Route::get('/singleDonation/{id}', [DonationController::class, 'show2'])->name('
 Route::get('/subcategory', function () {
     return view('Pages.sub-category');
 });
-Route::get('/subcategory/{id}', [DonationController::class, 'showw'])->name('subcategory');
+Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subcategory');
+// Route::get('testlogin', [UserProfileController::class, 'show']);
 
 
 
