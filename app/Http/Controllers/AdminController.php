@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
@@ -14,7 +16,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins=Admin::get();
+        // dd($admins);
+       return view('dashboard.admins.index', compact('admins'));
     }
 
     /**
@@ -24,7 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.admins.create');
     }
 
     /**
@@ -35,7 +39,32 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,jfif |max:2048',
+            // Add any desired image validation rules
+            'email' => 'required|email',
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
+            ]
+        ]);
+
+        $admins = new Admin();
+
+        $admins->name = $request->input('name');
+        $admins->email = $request->input('email');
+        $admins->password = Hash::make ($request->input('password'));
+
+
+        
+
+        
+
+        $admins->save();
+
+        return redirect()->route('admins.index')->with('success', 'Admin created successfully');
     }
 
     /**
@@ -55,9 +84,13 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit($id)
     {
-        //
+        
+        $admins = Admin::findOrFail($id);
+        // dd($admins);
+
+        return view('dashboard.admins.edit', compact('admins'));
     }
 
     /**
@@ -67,9 +100,50 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
-    {
-        //
+    public function update(Request $request, Admin $admins , $id)
+  {
+    // dd($request->all());
+   
+    //   $request->validate([
+    //       'name' => 'required',
+    //       'image' => 'required|image|mimes:jpeg,png,jpg,gif,jfif |max:2048',
+    //       Add any desired image validation rules
+    //       'email' => 'required|email'. $id,
+    //       'password' => [
+    //           'required',
+    //           'min:8',
+    //           'regex:/^(?=.[A-Z])(?=.[a-z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%*?&]+$/']]);
+
+        $admins = Admin::findOrFail($id);
+
+
+        // $admins = new Admin();
+
+        $admins->name = $request->input('name');
+        $admins->email = $request->input('email');
+        $admins->password = Hash::make ($request->input('password'));
+        
+        
+
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $imageName); // Upload the image to the public/images directory
+        //     $admins->image = $imageName;
+        //     // $storedPath = $uploadedFile->store('public/photo');
+        //     $admins->save();
+
+        // }
+        try {
+            $admins->save();
+        } catch (\Exception $e) {
+            // Log or dd the exception to see the error message
+            dd($e->getMessage());
+        }
+
+        // $admins->save();
+
+        return redirect()->route('admins.index')->with('success', 'Admin updated successfully');
     }
 
     /**
@@ -78,8 +152,9 @@ class AdminController extends Controller
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
-        //
+        Admin::destroy($id);
+        return back()->with('success', 'Admin deleted successfully.');
     }
 }

@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'mobile',
         'address',
+        'facebook_id'
     ];
 
     /**
@@ -46,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     //With UserDonation Model
-    public function userdonations() 
+    public function userdonations()
     {
         return $this->hasMany(UserDonation::class);
     }

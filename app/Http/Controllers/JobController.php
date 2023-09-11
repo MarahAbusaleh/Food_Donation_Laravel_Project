@@ -14,7 +14,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $jobs=Job::get();
+        // dd($admins);
+       return view('dashboard.jobs.index', compact('jobs'));
     }
 
     /**
@@ -24,7 +26,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.jobs.create');
     }
 
     /**
@@ -35,7 +37,13 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData =  $request->validate([
+            'name' => 'required',
+        ]);
+    
+        Job::create($validatedData);
+    
+        return redirect()->route('jobs.index');
     }
 
     /**
@@ -55,9 +63,12 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Job $job)
+    public function edit($id)
     {
-        //
+        $jobs = Job::findOrFail($id);
+        // dd($categories);
+
+        return view('dashboard.jobs.edit', compact('jobs'));
     }
 
     /**
@@ -69,7 +80,16 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        $validatedData=$request->validate([
+            'name' => 'required',
+          ]);
+  
+      
+  
+     
+      $job->update($validatedData);
+  
+      return redirect()->route('jobs.index')->with('success', 'Job updated successfully');
     }
 
     /**
@@ -78,8 +98,9 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy($id)
     {
-        //
+        Job::destroy($id);
+        return back()->with('success', 'Job deleted successfully.');
     }
 }

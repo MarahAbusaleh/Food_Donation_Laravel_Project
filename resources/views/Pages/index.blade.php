@@ -1,5 +1,6 @@
 @extends('Layout.master')
 @section('content')
+{{-- {{ auth()->user()->name; }} --}}
     <main>
         @if (session('message'))
             <div id="vola_message" class="alert alert-primary">{{ session('message') }}</div>
@@ -228,9 +229,7 @@
                                                 <img class="partners_images" alt="" src="{{ $item->image }}" />
                                             </div>
                                         </div>
-                                    @endforeach
-
-                                    
+                                    @endforeach             
                                 </div>
                             </strong>
                         </div>

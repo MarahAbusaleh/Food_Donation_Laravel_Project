@@ -14,7 +14,9 @@ class VolanteerController extends Controller
      */
     public function index()
     {
-        //
+        $volanteers=Volanteer::get();
+        // dd($admins);
+       return view('dashboard.volanteers.index', compact('volanteers'));
     }
 
     /**
@@ -24,7 +26,8 @@ class VolanteerController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.volanteers.create');
+        
     }
 
     /**
@@ -35,7 +38,18 @@ class VolanteerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData =  $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'job' => 'required',
+            'comments' => 'required',
+            'mobile' => 'required',
+            
+        ]);
+    
+        Volanteer::create($validatedData);
+    
+        return redirect()->route('volanteers.index');
     }
 
     /**
@@ -55,9 +69,12 @@ class VolanteerController extends Controller
      * @param  \App\Models\Volanteer  $volanteer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Volanteer $volanteer)
+    public function edit($id)
     {
-        //
+        $volanteers = Volanteer::findOrFail($id);
+        // dd($categories);
+
+        return view('dashboard.volanteers.edit', compact('volanteers'));
     }
 
     /**
@@ -69,7 +86,22 @@ class VolanteerController extends Controller
      */
     public function update(Request $request, Volanteer $volanteer)
     {
-        //
+        $validatedData=$request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'job' => 'required',
+            'comments' => 'required',
+            'mobile' => 'required',
+        
+          ]);
+  
+      
+  
+     
+      
+      $volanteer->update($validatedData);
+  
+      return redirect()->route('volanteers.index')->with('success', 'Volanteer updated successfully'); 
     }
 
     /**
@@ -78,8 +110,9 @@ class VolanteerController extends Controller
      * @param  \App\Models\Volanteer  $volanteer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Volanteer $volanteer)
+    public function destroy($id)
     {
-        //
+        Volanteer::destroy($id);
+        return back()->with('success', 'Volanteer deleted successfully.');
     }
 }

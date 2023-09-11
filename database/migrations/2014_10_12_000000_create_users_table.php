@@ -18,7 +18,17 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            
+            //nullable->because when user logged with google he don't need to enter pass
+            $table->string('password')->nullable();
+
+            $table->string('google_id')->nullable();
+
+            $table->string('from_google')->nullable();
+
+            $table->string('facebook_id')->nullable();
+
+
             $table->bigInteger('mobile') ->nullable();
             $table->string('address') ->nullable();
          //   $table->boolean('is_logged')->nullable();

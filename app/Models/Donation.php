@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Donation extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'description', 'price', 'image', 'category_id'];
-
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'image',
+        'category_id',
+    ];
     //With Category Model
     public function category() 
     {

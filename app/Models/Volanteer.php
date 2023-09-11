@@ -14,6 +14,6 @@ class Volanteer extends Model
         'email',
         'job',
         'comments',
-        'mobile'
+        'mobile',
     ];
 }
