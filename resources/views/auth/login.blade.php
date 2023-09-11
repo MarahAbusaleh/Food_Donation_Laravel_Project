@@ -21,13 +21,13 @@
         <div class="container">
             <div class="signin-content">
                 <div class="signin-image">
-                    <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                    <figure><img src="images/login2-removebg-preview.png" alt="sing up image"></figure>
                     <a href="register" class="signup-image-link">Create an account</a>
                 </div>
 
                 <div class="signin-form">
                     <h2 class="form-title">Log in</h2>
-                    <form method="POST" class="register-form" id="login-form" action="{{ url('home') }}">
+                    <form method="POST" class="register-form" id="login-form" action="{{ url('login') }}">
                         @csrf
 
                         {{-- start email --}}

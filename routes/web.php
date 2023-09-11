@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\ContactController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\VolanteerController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Models\UserDonation;
 use Illuminate\Support\Facades\Blade;
 
@@ -28,25 +29,23 @@ use Illuminate\Support\Facades\Blade;
 |
 */
 
-// Route::get('/login', function () {
-//     return view('auth/login');
-// })->name('loggin');
+Route::get('/login', function () {
+    return view('auth/login');
+})->name('loggin');
 
 // Route::post('/indexxx', function () {
 //     // return view('Pages.sub-category');
-// Route::get('/', function () {
-//     return view('Pages.single');
-// })->name('Pages.single');
 
-// Route::get('/food', function () {
-// });
+
+Route::get('/food', function () {
+});
 Route::get('/money', function () {
     return view('Pages.money-donation');
 });
 
-Route::get('/money/{id}/{user_id}', [DonationController::class, 'show'])->name('money.show');
-Route::get('/things/{id}/{user_id}', [DonationController::class, 'shows'])->name('things.show');
-Route::get('/other/{user_id}', [OtherController::class, 'show'])->name('other.show');
+Route::get('/money/{id}', [DonationController::class, 'show'])->middleware(['auth', 'verified'])->name('money.show');
+Route::get('/things/{id}', [DonationController::class, 'shows'])->middleware(['auth', 'verified'])->name('things.show');
+Route::get('/other', [OtherController::class, 'show'])->middleware(['auth', 'verified'])->name('other.show');
 // Route::post('/money', [Controller::class, 'user'])->name('money.store');
 Route::post('/things', [UserDonationController::class, 'update'])->name('food.store');
 Route::post('/money', [UserDonationController::class, 'store'])->name('money.store');
@@ -71,9 +70,12 @@ Route::get('paypal/cancel', [PaymentDetailsController::class, 'cancel'])->name('
 
 
 
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
+// Route::get('/dashboard', )->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 
 
@@ -83,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
 
 Route::get('/welcome-dashboard', function () {
@@ -155,7 +157,7 @@ Route::resource('paymentdetails', PaymentDetailsController::class);
 Route::resource('dashboard/profiles', ProfileController::class);
 Route::resource('dashboard/user-donations', UserDonationController::class);
 Route::resource('dashboard/volanteers', VolanteerController::class);
-require __DIR__ . '/auth.php';
+
 
 
 Route::get('/singleDonation/{id}', [DonationController::class, 'show2'])->name('singleDonation');

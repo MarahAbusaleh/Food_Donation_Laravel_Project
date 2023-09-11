@@ -50,13 +50,13 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="plans"><img src="{{ asset('images/fooddonate.png') }}" style="height: 45px; width: 45px;"><br>
-                            <h6 class="pt-2"><a href="{{ route('things.show', ['id' => $singleDonation->id, 'user_id' => 1]) }}" target="_blank"><span style="color:#5c5c5c;"><strong>Food Donation </strong></span></a></h6>
+                            <h6 class="pt-2"><a href="{{ route('things.show', ['id' => $singleDonation->id]) }}" target="_blank"><span style="color:#5c5c5c;"><strong>Food Donation </strong></span></a></h6>
                         </div>
                         {{-- Auth()->user()->id --}}
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="plans"><img src="{{ asset('images/moneydonate.png') }}" style="height: 45px; width: 45px;"><br>
-                            <h6 class="pt-2"><a href="{{ route('money.show', ['id' => $singleDonation->id, 'user_id' => 1]) }}" target="_blank"><span style="color:#5c5c5c;"><strong>Money Donation </strong></span></a></h6>
+                            <h6 class="pt-2"><a href="{{ route('money.show', ['id' => $singleDonation->id]) }}" target="_blank"><span style="color:#5c5c5c;"><strong>Money Donation </strong></span></a></h6>
                         </div>
                     </div>
                 </div>

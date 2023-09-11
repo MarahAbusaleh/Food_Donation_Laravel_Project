@@ -17,10 +17,10 @@ class DonationController extends Controller
      */
     public function index()
     {
-        $donations=Donation::get();
-        $category=Category::all();
+        $donations = Donation::get();
+        $category = Category::all();
         // dd($categoryName);
-       return view('dashboard.donations.index', compact('donations', 'category'));
+        return view('dashboard.donations.index', compact('donations', 'category'));
     }
 
     /**
@@ -30,10 +30,10 @@ class DonationController extends Controller
      */
     public function create(Request $request)
     {
-        $categoryNames=Category::get();
-        
+        $categoryNames = Category::get();
+
         // $categories= $donations->category->name;
-        return view('dashboard.donations.create',compact('categoryNames'));
+        return view('dashboard.donations.create', compact('categoryNames'));
     }
 
     /**
@@ -49,21 +49,21 @@ class DonationController extends Controller
         $newImageName = uniqid() . '-' . $request->input('name') . '.' . $request->file('image')->extension();
         $relativeImagePath = 'assets/images/' . $newImageName;
         $request->file('image')->move(public_path('assets/images'), $newImageName);
-        $validatedData =  $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',
             // 'image' => 'required',
             'price' => 'required',
         ]);
 
-    
+
         Donation::create([
             'name' => $request->input('name'),
             'price' => $request->input('price'),
             'description' => $request->input('description'),
             'image' => $relativeImagePath,
         ]);
-    
+
         return redirect()->route('donations.index');
     }
 
@@ -73,29 +73,36 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function show($id, $user_id)
+    public function show($id)
     {
+        $user_id = auth()->user()->id;
         $donation = Donation::where('id', $id)->first();
-        $userdonation = UserDonation::where('user_id', $user_id)->first();
+        // $userdonation = UserDonation::where('user_id', $user_id)->first();
         // $donation = Donation::where('id', $id)->first();
-        $user = User::where('id', $user_id)->first(); // Use $user_id to query the user
+        // $user = User::where('id', $user_id)->first();  Use $user_id to query the user
         // $userdonation = UserDonation::all(); // Use $user_id to query the user
         // $user = User::all(); // Use $user_id to query the user
-        return view('Pages.money-donation',[
-            'donations' => $donation, 'userdonations'=>$userdonation, 'users' => $user
+        return view('Pages.money-donation', [
+            'donations' => $donation,
         ]);
     }
-    public function shows($id, $user_id)
+    public function shows($id)
     {
-        $donation = Donation::where('id', $id)->first();
-        $userdonation = UserDonation::where('user_id', $user_id)->first();
-        // $donation = Donation::where('id', $id)->first();
-        $user = User::where('id', $user_id)->first(); // Use $user_id to query the user
-        // $userdonation = UserDonation::all(); // Use $user_id to query the user
-        // $user = User::all(); // Use $user_id to query the user
-        return view('Pages.food-donation',[
-            'donations' => $donation, 'userdonations'=>$userdonation, 'users' => $user
-        ]);
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $donation = Donation::where('id', $id)->first();
+            // $userdonation = UserDonation::where('user_id', $user_id)->first();
+            // $donation = Donation::where('id', $id)->first();
+            // $user = User::where('id', $user_id)->first();
+            // $userdonation = UserDonation::all(); // Use $user_id to query the user
+            // $user = User::all(); // Use $user_id to query the user
+            return view('Pages.food-donation', [
+                'donations' => $donation,
+            ]);
+        }else {
+            return view('auth.login');
+        }
+
     }
     // /-Show Method to display the Single Donation Details in 'Single.blade.php'-/
     public function show2($id)
@@ -134,15 +141,15 @@ class DonationController extends Controller
      * @param  \App\Models\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $validatedData=$request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             // 'image' => 'required',
             'price' => 'required',
             'description' => 'required',
-          ]);
-          $data = $request->except(['_token', '_method']);
+        ]);
+        $data = $request->except(['_token', '_method']);
 
         // Check if a new image was uploaded
         if ($request->hasFile('image')) {
@@ -154,17 +161,17 @@ class DonationController extends Controller
 
         Donation::where('id', $id)->update($data);
 
-  
-    //   if ($request->hasFile('image')) {
-    //       $image = $request->file('image');
-    //       $imageName = time() . '.' . $image->getClientOriginalExtension();
-    //       $image->move(public_path('images'), $imageName); 
-  
-    //   }
-      
-    
-  
-      return redirect()->route('donations.index')->with('success', 'Donation updated successfully');
+
+        //   if ($request->hasFile('image')) {
+        //       $image = $request->file('image');
+        //       $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //       $image->move(public_path('images'), $imageName); 
+
+        //   }
+
+
+
+        return redirect()->route('donations.index')->with('success', 'Donation updated successfully');
     }
 
     /**
@@ -179,8 +186,8 @@ class DonationController extends Controller
         return back()->with('success', 'Donation deleted successfully.');
     }
 
-public function storeImage($request)
-        {
+    public function storeImage($request)
+    {
         $newImageName = uniqid() . '-' . $request->addedCategoryName . '.' . $request->file('image')->extension();
         $relativeImagePath = 'assets/images/' . $newImageName;
         $request->file('image')->move(public_path('assets/images'), $newImageName);

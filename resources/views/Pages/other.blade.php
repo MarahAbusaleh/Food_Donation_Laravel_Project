@@ -13,8 +13,8 @@
                         <form class="custom-form donate-form" action="{{ route('other.store') }}" method="post" role="form">
                             @csrf
                             @method('post')
-                            <input type="hidden" name="user_id" value="{{ $userdonations->user_id }}">
-                            <input type="hidden" name="donation_id" value="{{ $userdonations->donation_id }}">
+                            {{-- <input type="hidden" name="user_id" value="{{ $userdonations->user_id }}"> --}}
+                            {{-- <input type="hidden" name="donation_id" value="{{ $userdonations->donation_id }}"> --}}
                             <h3 class="mb-4">Make a donation</h3>
 
                             <div class="row">
@@ -27,10 +27,10 @@
                                         {{-- <span class="input-group-text" id="basic-addon1">$</span> --}}
 
                                         <textarea type="text" class="form-control" placeholder="Contents" aria-label="Username"
-                                            aria-describedby="basic-addon1" name="textarea"></textarea>
+                                            aria-describedby="basic-addon1" name="description"></textarea>
                                     </div>
-                                    @if ($errors->has('textarea'))
-                                        <span class="text-danger">{{ $errors->first('textarea') }}</span>
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
 

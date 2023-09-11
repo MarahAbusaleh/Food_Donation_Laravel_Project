@@ -76,7 +76,7 @@
                 </div>
                 <div class="signup-image">
                     <figure>
-                        <img src="images/signup-image.jpg" alt="">
+                        <img src="images/reg.png" alt="">
                     </figure>
                     <a href="login" class="signup-image-link">I am already member</a>
                 </div>

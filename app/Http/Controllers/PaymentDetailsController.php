@@ -15,18 +15,18 @@ class PaymentDetailsController extends Controller
 
     public function payment(Request $request)
     {
-        
+
 
         // Validation (example)
         $request->validate([
             'donation-phone' => 'required|regex:/^07\d{8}$/',
             'donation-address' => 'required|string',
-        ],[
+        ], [
             'donation-phone.required' => 'Please enter your phone number.',
             'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
             'donation-address.required' => 'Please enter your address.',
             'donation-address.string' => 'The address must be a valid string.',
-          ]);
+        ]);
 
 
         $provider = new PayPalClient;
@@ -49,17 +49,21 @@ class PaymentDetailsController extends Controller
             ]
         ]);
 
-        $user = new User();
-        $user->mobile = $request->input('donation-phone');
-        $user->address = $request->input('donation-address');
-        $user->password = bcrypt('1234'); // Hash the password securely
+        $user_idd = auth()->user()->id;
+
+        User::where('id', $user_idd)->update([
+            'mobile' => $request->input('donation-phone'),
+            'address' => $request->input('donation-address')
+        ]);
 
         $userDonation = new UserDonation();
-        $userDonation->user_id = $request->input('user_id');
+        $userDonation->user_id = $user_idd;
         $userDonation->donation_id = $request->input('donation_id');
         $userDonation->total = $request->input('donationPrice') * $request->input('quantity');
         $userDonation->quantity = $request->input('quantity');
         $userDonation->save();
+
+        
 
         // dd($response);
         if (isset($response['id']) && $response['id'] != null) {

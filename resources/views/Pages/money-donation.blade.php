@@ -10,8 +10,8 @@
                         <form class="custom-form donate-form" action="{{ route('paypal') }}" method="post" role="form">
                             @csrf
                             @method('post')
-                            <input type="hidden" name="user_id" value="{{ $userdonations->user_id }}">
-                            <input type="hidden" name="donation_id" value="{{ $userdonations->donation_id }}">
+                            {{-- <input type="hidden" name="user_id" value="{{ $userdonations->user_id }}"> --}}
+                            <input type="hidden" name="donation_id" value="{{ $donations->id }}">
 
                             <h3 class="mb-4">Make a donation</h3>
 

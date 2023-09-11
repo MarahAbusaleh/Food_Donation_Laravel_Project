@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\UserDonation;
 use App\Models\User;
 use App\Models\PaymentDetails;
@@ -9,6 +10,7 @@ use App\Models\Donation;
 
 use App\Models\Other;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OtherController extends Controller
 {
@@ -45,27 +47,37 @@ class OtherController extends Controller
         $request->validate([
             'donation-phone' => 'required|regex:/^07\d{8}$/',
             'donation-address' => 'required|string',
-            'textarea' => 'required',
-        ],[
+            'description' => 'required',
+        ], [
             'donation-phone.required' => 'Please enter your phone number.',
             'donation-phone.regex' => 'Please enter a valid phone number as 07XXXXXXXX.',
             'donation-address.required' => 'Please enter your address.',
             'donation-address.string' => 'The address must be a valid string.',
-            'textarea.required' => 'Please provide some additional information.',
+            'description.required' => 'Please provide some additional information.',
 
         ]);
+        $user_idd = auth()->user()->id;
 
-        $user = new User();
-        $user->mobile = $request->input('donation-phone');
-        $user->address = $request->input('donation-address');
-        $user->password = bcrypt('1234'); // Hash the password securely
+        User::where('id', $user_idd)->update([
+            'mobile'=>$request->input('donation-phone'),
+            'address'=>$request->input('donation-address')
+        ]);
+        // $user = new User();
+        // $user->mobile = $request->input('donation-phone');
+        // $user->address = $request->input('donation-address');
+        // $user->save();
 
-        $userDonation=new UserDonation();
-        $userDonation->user_id=$request->input('user_id');
-        $userDonation->donation_id=$request->input('donation_id');
-        $userDonation->quantity= $request->input('quantity');
-        $userDonation->description= $request->input('textarea');
-        $userDonation->save();
+        // $userDonation = new UserDonation();
+        $other = new Other();
+        $other->user_id = $user_idd;
+        $other->description = $request->input('description');
+        $other->save();
+
+        // $userDonation->user_id = $request->input('user_id');
+        // $userDonation->donation_id = $request->input('donation_id');
+        // $userDonation->quantity = $request->input('quantity');
+        // $userDonation->description = $request->input('description');
+        // $userDonation->save();
 
         return redirect('/')->with('success', 'Your donation has been submit successfully!');
     }
@@ -76,16 +88,22 @@ class OtherController extends Controller
      * @param  \App\Models\Other  $other
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show()
     {
-        $userdonation = UserDonation::where('user_id', $user_id)->first();
-        // $donation = Donation::where('id', $id)->first();
-        $user = User::where('id', $user_id)->first(); // Use $user_id to query the user
-        // $userdonation = UserDonation::all(); // Use $user_id to query the user
-        // $user = User::all(); // Use $user_id to query the user
-        return view('Pages.other',[
-            'userdonations'=>$userdonation, 'users' => $user
-        ]);
+        // dd(auth()->check());
+        if (Auth::check()) {
+            // $user_id = auth()->user()->id;
+            // $userdonation = UserDonation::where('user_id', $user_id)->first();
+            // $donation = Donation::where('id', $id)->first();
+            // $user = User::where('id', $user_id)->first(); 
+            // $userdonation = UserDonation::all(); // Use $user_id to query the user
+            // $user = User::all(); // Use $user_id to query the user
+            return view('Pages.other');
+        } else {
+
+            return view('auth.login');
+        }
+
     }
 
     /**

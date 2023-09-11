@@ -5,7 +5,7 @@
                     <img src="{{ asset('images/logo.png') }}" class="logo img-fluid" alt="">
                     <a class="navbar-brand">
                         <span>
-                            Kind Heart Charity
+                            FoodSHare
                             <small>Non-profit Organization</small>
                         </span>
                     </a>
@@ -30,7 +30,7 @@
 
                     <ul class="footer-menu">
 
-                        <li class="footer-menu-item"><a href="#section_4" class="footer-menu-link">Become a volunteer <br>
+                        <li class="footer-menu-item"><a href="{{ url('/#becomeVol') }}" class="footer-menu-link">Become a volunteer <br>
                             Partner with us
                         </a>
                         </li>
@@ -61,7 +61,7 @@
                         Irbid, Jordan
                     </p>
 
-                    <a href="#" class="custom-btn btn mt-3">Contact Us</a>
+                    <a href="{{url('contact-us')}}" class="custom-btn btn mt-3">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-md-7 col-12">
-                        <p class="copyright-text ">Copyright © 2036 <a href="#">Kind Heart</a>
+                        <p class="copyright-text ">Copyright © 2036 <a href="#">FoodSHare</a>
                         </p>
                     </div>
 
