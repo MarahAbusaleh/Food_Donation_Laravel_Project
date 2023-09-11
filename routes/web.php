@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 // use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\VolanteerController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,9 @@ use App\Http\Controllers\DonationController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+// Route::get('/login', function () {
+//     return view('auth/login');
+// });
 // Route::get('/', function () {
 //     return view('Pages.sub-category');
 //     return view('Pages.index');
@@ -31,9 +32,10 @@ Route::get('/', function () {
 // });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [UserProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
@@ -52,6 +54,7 @@ Route::get('/subcategory', function () {
     return view('Pages.sub-category');
 });
 Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subcategory');
+// Route::get('testlogin', [UserProfileController::class, 'show']);
 
 
 
@@ -60,6 +63,7 @@ Route::get('/subcategory/{id}', [DonationController::class, 'show'])->name('subc
 
 
 Route::controller(HomeController::class)->group(function () {
+    Route::post('home', 'index');
     Route::get('/', 'index');
     Route::post('save_volanteer', 'storeVolanteer');
 });

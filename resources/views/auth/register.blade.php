@@ -41,7 +41,7 @@
                             <label for="email"><i class="zmdi zmdi-email" :value="__('Email')"></i></label>
                             <input type="email" name="email" id="email" placeholder="Your Email"
                                  />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                         </div>
                         {{-- end email --}}
 

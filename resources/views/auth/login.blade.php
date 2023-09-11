@@ -34,8 +34,7 @@
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-account material-icons-name"
                                     :value="__('Email')"></i></label>
-                            <input   id="email" placeholder="Your Name"
-                                 type="email" name="email"  />
+                            <input id="email" placeholder="Your Name" type="email" name="email" />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         {{-- end email --}}
@@ -43,8 +42,7 @@
                         {{-- start password --}}
                         <div class="form-group">
                             <label for="password"><i class="zmdi zmdi-lock" :value="__('Password')"></i></label>
-                            <input type="password"  id="password" placeholder="Password"
-                                 name="password"  />
+                            <input type="password" id="password" placeholder="Password" name="password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                         {{-- end password --}}
@@ -60,11 +58,14 @@
                             @endif
                             {{-- end forget --}}
 
-                            <div class="form-group form-button">
+                            {{-- <div class="form-group form-button">
                                 <input type="submit" name="signin" id="signin" class="form-submit"
                                     value="Log in" />
 
-                            </div>
+                            </div> --}}
+                            <x-primary-button class="ml-3">
+                                {{ __('Log in') }}
+                            </x-primary-button>
                     </form>
                     <div class="social-login">
                         <span class="social-label">Or login with</span>
